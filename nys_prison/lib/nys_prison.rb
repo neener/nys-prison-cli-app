@@ -1,5 +1,2 @@
-require "nys_prison/version"
-
-module NysPrison
-  # Your code goes here...
-end
+require_relative "./nys_prison/version"
+require_relative "./nys_prison/cli"
