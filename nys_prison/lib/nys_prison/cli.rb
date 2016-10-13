@@ -21,7 +21,8 @@ class NysPrison::CLI
 			input = gets.strip.downcase
 
 			if input.to_i > 0 
-				puts @prisons[input.to_i-1]
+				the_prison = @prisons[input.to_i-1]
+				puts "#{the_prison.name} - #{the_prison.location}"
 			elsif input == "list"
 				list_prisons
 			else
