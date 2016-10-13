@@ -10,6 +10,7 @@ class NysPrison::Prison
 	def self.scrape_prisons
 		prisons = []
 
+		prisons << self.scrape_wiki
 		# go to wiki, find the prison
 		# extract the properties
 		# instantiate a prison
@@ -17,4 +18,14 @@ class NysPrison::Prison
 		prisons
 	end
 
+	def self.scrape_wiki
+		doc = Nokogiri::HTML(open("https://en.wikipedia.org/wiki/List_of_New_York_state_prisons"))
+		
+		prison = self.new
+		prison.name = doc.search(".div-col ul li a").map(&:text).each do |p|
+			puts p
+		end
+		prison
+
+	end
 end
