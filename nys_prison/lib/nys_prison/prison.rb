@@ -1,6 +1,6 @@
 class NysPrison::Prison
 
-	attr_accessor :name, :location, :url
+	attr_accessor :name, :location, :url, :history
 
 	@@all = []
 
@@ -28,8 +28,12 @@ class NysPrison::Prison
 	def self.scrape_prison_info(input)
 		prison = NysPrison::Prison.find(input)
 		doc = Nokogiri::HTML(open(prison.url))
+			# binding.pry
 			prison.name = doc.search("h1#firstHeading").text
-			# prison.location = doc.search().text
+			prison.location = doc.search("table.infobox.vcard td.label a").text
+			# prison.capacity = doc.search("")
+			# prison.security = doc.search("")
+			prison.history = doc.search("p").text
 		prison
 	end
 

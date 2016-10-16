@@ -31,6 +31,13 @@ class NysPrison::CLI
 			if input.to_i > 0 
 				the_prison = NysPrison::Prison.scrape_prison_info(input.to_i)
 				puts "#{the_prison.name} - #{the_prison.location}"
+				puts ""
+				# puts "Capacity: #{the_prison.capacity}"
+				# puts "Security Level: #{the_prison.security}"
+				# puts ""
+				puts "HISTORY"
+				puts ""
+				puts "#{the_prison.history}"
 			elsif input == "list"
 				list
 			else
