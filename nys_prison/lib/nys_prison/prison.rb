@@ -25,11 +25,11 @@ class NysPrison::Prison
 		end
 	end
 
-	def scrape_prison_info(input)
-		prison = Prison.find(input)
-		doc = Nokogiri::HTML(open(self.url))
+	def self.scrape_prison_info(input)
+		prison = NysPrison::Prison.find(input)
+		doc = Nokogiri::HTML(open(prison.url))
 			binding.pry
-			prison.name = doc.search("firstHeading").text
+			prison.name = doc.search("h1#firstHeading").text
 			# prison.location = doc.search().text
 		prison
 	end
