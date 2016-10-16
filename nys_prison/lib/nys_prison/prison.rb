@@ -6,27 +6,15 @@ class NysPrison::Prison
 
 	def initialize(url = nil)
 		@url = url
-		@name = name
-		@location = location
-		# get_name_and_location_from_url
 	end
-
-	def name
-
-	end
-
-	# def get_name_and_location_from_url
-	# 	# do whatever you need to to scrape the name and location from the URL, then set them to the @name and @location instance variables
-	# 	doc = Nokogiri::HTML(doc = Nokogiri::HTML(open("https://en.wikipedia.org/wiki/List_of_New_York_state_prisons")))
-	# end
 
 	def self.all
 		@@all
 	end
 
-	# def self.find(id)
-	# 	self.all[id-1]
-	# end
+	def self.find(id)
+		self.all[id-1]
+	end
 
 	def self.scrape_wiki
 		doc = Nokogiri::HTML(open("https://en.wikipedia.org/wiki/List_of_New_York_state_prisons"))
@@ -37,12 +25,22 @@ class NysPrison::Prison
 		end
 	end
 
-	# def doc
-	# 	@doc = Nokogiri::HTML(open(self.url))
-	# end
+	def scrape_prisons
+		Prison.new(name, url, location)
+	end
 
-	# write a method to scrape each individual prison page for location, capacity, level of security, history
+	def scrape_prison_info
+		prisons_list = Prison.all
+		prisons_list.each do |prison|
+			binding.pry
+			prison.name = doc.search("firstHeading").text
+			prison.location = doc.search().text
+		end
+	end
+
+	def doc
+		@doc = Nokogiri::HTML(open(self.url))
+	end
+
 end
 
-# lookup what ||= or equal does
-# refresh on private method

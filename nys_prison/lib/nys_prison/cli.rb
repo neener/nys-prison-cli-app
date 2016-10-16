@@ -16,16 +16,14 @@ class NysPrison::CLI
 		end
 	end
 
-	# def print_details
-	# 	puts "#{prison.name}" 	
-	# end
-
 	def menu
 		input = nil
 		while input != "exit"
-			puts "Enter the number of the prison you would like more detail or type list to see more prisons or type exit:"
-			input = gets.strip.downcase
+			puts "Enter the number of the prison you would like more detail on:"
+			puts "Type list to see a list of prisons"
+			puts "Type exit to leave the program"
 
+			input = gets.strip.downcase
 
 			if input.to_i > 0 
 				the_prison = @prisons[input.to_i-1]

@@ -9,6 +9,9 @@ require "nys_prison"
 # (If you use this, don't forget to add pry to your Gemfile!)
 # require "pry"
 # Pry.start
+def reload!
+	load './lib/nys_prison/prison.rb'
+end
 
 require "irb"
 IRB.start
