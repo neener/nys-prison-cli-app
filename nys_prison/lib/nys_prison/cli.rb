@@ -12,20 +12,18 @@ class NysPrison::CLI
 		puts ""
 		@prisons = NysPrison::Prison.all
 		@prisons.each.with_index(1) do |prison, i|
-			puts "#{i}. #{prison.name}"
+			puts "#{i}. #{prison.url}"
 		end
 	end
 
-	def print_stats
-		puts "#{prison.name}"
-
-		puts prison.stats
-	end
+	# def print_details
+	# 	puts "#{prison.name}" 	
+	# end
 
 	def menu
 		input = nil
 		while input != "exit"
-			puts "Enter the number of the prison you would like more info or type list to see more prisons or type exit:"
+			puts "Enter the number of the prison you would like more detail or type list to see more prisons or type exit:"
 			input = gets.strip.downcase
 
 
