@@ -8,6 +8,7 @@ class NysPrison::CLI
 	end
 
 	def list
+		puts ""
 		puts "Welcome to the NYS prison directory:"
 		puts ""
 		@prisons = NysPrison::Prison.all
@@ -19,14 +20,16 @@ class NysPrison::CLI
 	def menu
 		input = nil
 		while input != "exit"
+			puts ""
 			puts "Enter the number of the prison you would like more detail on:"
+			puts ""
 			puts "Type list to see a list of prisons"
 			puts "Type exit to leave the program"
 
 			input = gets.strip.downcase
 
 			if input.to_i > 0 
-				the_prison = @prisons[input.to_i-1]
+				the_prison = NysPrison::Prison.scrape_prison_info(input.to_i-1)
 				puts "#{the_prison.name} - #{the_prison.location}"
 			elsif input == "list"
 				list
