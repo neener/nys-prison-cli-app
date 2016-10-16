@@ -25,10 +25,6 @@ class NysPrison::Prison
 		end
 	end
 
-	def scrape_prisons
-		Prison.new(name, url, location)
-	end
-
 	def scrape_prison_info
 		prisons_list = Prison.all
 		prisons_list.each do |prison|
