@@ -29,7 +29,7 @@ class NysPrison::CLI
 			input = gets.strip.downcase
 
 			if input.to_i > 0 
-				the_prison = NysPrison::Prison.scrape_prison_info(input.to_i-1)
+				the_prison = NysPrison::Prison.scrape_prison_info(input.to_i)
 				puts "#{the_prison.name} - #{the_prison.location}"
 			elsif input == "list"
 				list
