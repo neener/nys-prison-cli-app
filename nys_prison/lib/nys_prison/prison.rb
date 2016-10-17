@@ -4,8 +4,11 @@ class NysPrison::Prison
 
 	@@all = []
 
-	def initialize(url = nil)
-		@url = url
+	def initialize(prison)
+		prison.each do |key, value|
+			self.send("#{key}=", value)
+		end
+		@@all << self
 	end
 
 	def self.all
@@ -21,22 +24,31 @@ class NysPrison::Prison
 		links = doc.search(".div-col ul li a")
 		urls = links.map{|a| "https://en.wikipedia.org#{a.attr("href")}"}
 		@@all = urls.map do |url|
-			self.new(url)
+			# binding.pry
+			self.scrape_prison_info(url)
 		end
 	end
 
-	def self.scrape_prison_info(input)
-		prison = NysPrison::Prison.find(input)
-		doc = Nokogiri::HTML(open(prison.url))
-			# binding.pry
-			prison.name = doc.search("h1#firstHeading").text
-			prison.location = doc.search("table.infobox.vcard td.label a").text
-			# prison.capacity = doc.search("")
-			# prison.security = doc.search("")
-			prison.history = doc.search("p").text
-		prison
-	end
+	# def self.scrape_prison_info(input)
+	# 	prison = NysPrison::Prison.find(input)
+	# 	doc = Nokogiri::HTML(open(prison.url))
+	# 		# binding.pry
+	# 		prison.name = doc.search("h1#firstHeading").text
+	# 		prison.location = doc.search("table.infobox.vcard td.label a").text
+	# 		prison.history = doc.search("p").text
+	# 	prison
+	# end
 
+	def self.scrape_prison_info(input)
+		doc = Nokogiri::HTML(open(input))
+		prison = {
+			:name => doc.search("h1#firstHeading").text,
+			:location => doc.search("table.infobox.vcard td.label a").text,
+			:history => doc.search("p").text,
+			:url => input
+		}
+		self.new(prison)
+	end
 
 end
 

@@ -11,9 +11,9 @@ class NysPrison::CLI
 		puts ""
 		puts "Welcome to the NYS prison directory:"
 		puts ""
-		@prisons = NysPrison::Prison.all
-		@prisons.each.with_index(1) do |prison, i|
-			puts "#{i}. #{prison.url}"
+		NysPrison::Prison.all.each_with_index do |prison, i|
+			# binding.pry
+			puts "#{i + 1}. #{prison.name}"
 		end
 	end
 
@@ -24,6 +24,7 @@ class NysPrison::CLI
 			puts "Enter the number of the prison you would like more detail on:"
 			puts ""
 			puts "Type list to see a list of prisons"
+			puts ""
 			puts "Type exit to leave the program"
 
 			input = gets.strip.downcase
