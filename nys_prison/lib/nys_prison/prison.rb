@@ -39,6 +39,7 @@ class NysPrison::Prison
 	# end
 
 	def self.scrape_prison_info(input)
+		# binding.pry
 		doc = Nokogiri::HTML(open(input))
 		prison = {
 			:name => doc.search("h1#firstHeading").text,
