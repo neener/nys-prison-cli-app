@@ -28,18 +28,7 @@ class NysPrison::Prison
 		end
 	end
 
-	# def self.scrape_prison_info(input)
-	# 	prison = NysPrison::Prison.find(input)
-	# 	doc = Nokogiri::HTML(open(prison.url))
-	# 		# binding.pry
-	# 		prison.name = doc.search("h1#firstHeading").text
-	# 		prison.location = doc.search("table.infobox.vcard td.label a").text
-	# 		prison.history = doc.search("p").text
-	# 	prison
-	# end
-
 	def self.scrape_prison_info(input)
-		# binding.pry
 		doc = Nokogiri::HTML(open(input))
 		prison = {
 			:name => doc.search("h1#firstHeading").text,
