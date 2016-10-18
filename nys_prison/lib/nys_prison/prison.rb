@@ -24,7 +24,6 @@ class NysPrison::Prison
 		links = doc.search(".div-col ul li a")
 		urls = links.map{|a| "https://en.wikipedia.org#{a.attr("href")}"}
 		@@all = urls.map do |url|
-			# binding.pry
 			self.scrape_prison_info(url)
 		end
 	end
