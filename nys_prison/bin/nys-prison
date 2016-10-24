@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
-require './lib/nys_prison'
+require_relative '../lib/nys_prison'
 
 NysPrison::CLI.new.call

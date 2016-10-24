@@ -4,15 +4,15 @@ class NysPrison::CLI
 		NysPrison::Prison.scrape_wiki
 		list
 		menu
-		goodbye
+		puts "Thank You Goodbye."
 	end
 
 	def list
 		puts ""
 		puts "Welcome to the NYS prison directory:"
 		puts ""
-		NysPrison::Prison.all.each_with_index do |prison, i|
-			puts "#{i + 1}. #{prison.name}"
+		NysPrison::Prison.all.each.with_index(1) do |prison, i|
+			puts "#{i}. #{prison.name}"
 		end
 	end
 
@@ -29,7 +29,7 @@ class NysPrison::CLI
 			input = gets.strip
 
 			if input.to_i > 0 
-				the_prison = NysPrison::Prison.find(input.to_i)
+				the_prison = NysPrison::Prison.find(input.to_i - 1)
 				puts "#{the_prison.name} - #{the_prison.location}"
 				puts ""
 				puts "HISTORY"
@@ -39,10 +39,6 @@ class NysPrison::CLI
 				list
 			end
 		end
-	end
-
-	def goodbye
-		puts "Thank You Goodbye."
 	end
 
 end
